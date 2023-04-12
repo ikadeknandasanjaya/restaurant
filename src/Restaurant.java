@@ -1,26 +1,41 @@
+import java.util.ArrayList;
+
 public class Restaurant {
-    private String namaRestaurant;
 
-    private String alamatRestaurant;
+    private String name;
+    public String address;
 
-    public void setNamaRestaurant(String namaRestaurant) {
-        this.namaRestaurant = namaRestaurant;
+    public String getName() {
+        return name;
     }
 
-    public void setAlamatRestaurant(String alamatRestaurant) {
-        this.alamatRestaurant = alamatRestaurant;
+    public String getAddress() {
+        return address;
     }
 
-    public String getNamaRestaurant() {
-        return namaRestaurant;
+    ArrayList<Menu> makananList = new ArrayList<>();
+    ArrayList<Menu> minumanList = new ArrayList<>();
+
+    public ArrayList<Menu> getMakananList() {
+        return makananList;
     }
 
-    public String getAlamatRestaurant() {
-        return alamatRestaurant;
+    public ArrayList<Menu> getMinumanList() {
+        return minumanList;
     }
 
-    public Restaurant(String namaRestaurant, String alamatRestaurant) {
-        this.namaRestaurant = namaRestaurant;
-        this.alamatRestaurant = alamatRestaurant;
+    public Restaurant(String name, String address) {
+        this.name = name;
+        this.address = address;
+        makananList = new ArrayList<>();
+        minumanList = new ArrayList<>();
+    }
+
+    public void tambahMakanan(Menu menu) {
+        makananList.add(menu);
+    }
+    public void tambahMinuman (Menu menu) {
+        minumanList.add(menu);
     }
 }
+
