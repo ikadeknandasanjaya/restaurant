@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Restaurant {
 
+    int id;
+
     private String name;
     public String address;
 
@@ -13,29 +15,22 @@ public class Restaurant {
         return address;
     }
 
-    ArrayList<Menu> makananList = new ArrayList<>();
-    ArrayList<Menu> minumanList = new ArrayList<>();
-
-    public ArrayList<Menu> getMakananList() {
-        return makananList;
+    public ArrayList<Menu> getMenuList() {
+        return menuList;
     }
 
-    public ArrayList<Menu> getMinumanList() {
-        return minumanList;
-    }
+    ArrayList<Menu> menuList = new ArrayList<>();
 
-    public Restaurant(String name, String address) {
+
+    public Restaurant(String name, String address, int id) {
         this.name = name;
         this.address = address;
-        makananList = new ArrayList<>();
-        minumanList = new ArrayList<>();
+        this.id = id;
+        menuList = new ArrayList<>();
     }
 
-    public void tambahMakanan(Menu menu) {
-        makananList.add(menu);
-    }
-    public void tambahMinuman (Menu menu) {
-        minumanList.add(menu);
+    public void tambahMenu(Menu menu) {
+        menuList.add(menu);
     }
 }
 

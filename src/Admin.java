@@ -116,7 +116,8 @@ public class Admin {
         String name = scanner.nextLine();
         System.out.print("Masukan alamat restaurant : ");
         String address = scanner.nextLine();
-        Restaurant restaurantBaru = new Restaurant(name, address);
+        int idRestaurant = listRestaurant.size() + 1;
+        Restaurant restaurantBaru = new Restaurant(name, address, idRestaurant);
         listRestaurant.add(restaurantBaru);
         System.out.println("| Restaurant berhasil ditambahkan |");
         Admin admins = new Admin();
@@ -165,8 +166,9 @@ public class Admin {
             System.out.print("Masukan harganya: ");
             double hargaMenu = scanner.nextDouble();
             scanner.nextLine();
-            Menu menuBaru = new Menu(namaMenu, hargaMenu);
-            restaurant.tambahMakanan(menuBaru);
+            int menuId = restaurant.getMenuList().size() + 1;
+            Menu menuBaru = new Menu(menuId, namaMenu, hargaMenu);
+            restaurant.tambahMenu(menuBaru);
             System.out.println("Menu makanan berhasil ditambahkan.");
             System.out.println("| Tekan 1 untuk menambahkan lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
@@ -182,8 +184,9 @@ public class Admin {
             String namaMenu = scanner.nextLine();
             System.out.print("Masukan harganya: ");
             double hargaMenu = scanner.nextDouble();
-            Menu menuBaru = new Menu(namaMenu, hargaMenu);
-            restaurant.tambahMinuman(menuBaru);
+            int menuId = restaurant.getMenuList().size() + 1;
+            Menu menuBaru = new Menu(menuId, namaMenu, hargaMenu);
+            restaurant.tambahMenu(menuBaru);
             System.out.println("Menu minuman berhasil ditambahkan.");
             System.out.println("| Tekan 1 untuk menambahkan lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
@@ -217,9 +220,8 @@ public class Admin {
         scanner.nextLine();
 
         Restaurant restaurant = listRestaurant.get(restaurantIndex);
-        ArrayList<Menu> menuMakanan = restaurant.getMakananList();
-        ArrayList<Menu> menuMinuman = restaurant.getMinumanList();
-        if (menuMakanan.isEmpty()) {
+        ArrayList<Menu> menuRestaurant = restaurant.getMenuList();
+        if (menuRestaurant.isEmpty()) {
             System.out.println("Tidak terdapat menu untuk restaurant " + restaurant.getName());
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
@@ -232,11 +234,11 @@ public class Admin {
             }
         } else {
             System.out.println("| " + "Makanan :  " + restaurant.getName() + " |");
-            for (Menu item : menuMakanan) {
+            for (Menu item : menuRestaurant) {
                 System.out.println("| " +item.getNamaMenu() + " " + item.getHargaMenu()+ " |");
             }
             System.out.println("| " +"Minuman :  " + restaurant.getName() + " |");
-            for (Menu item : menuMinuman) {
+            for (Menu item : menuRestaurant) {
                 System.out.println("| " + item.getNamaMenu() + " " + item.getHargaMenu() + " |");
             }
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");

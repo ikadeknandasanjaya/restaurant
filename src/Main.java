@@ -9,6 +9,7 @@ public class Main {
         Login logins = new Login();
         Scanner scanner = new Scanner(System.in);
         ArrayList<Restaurant> restaurantList = new ArrayList<Restaurant>();
+
         logins.loginSystem(restaurantList);
         }
 //        Package Concept

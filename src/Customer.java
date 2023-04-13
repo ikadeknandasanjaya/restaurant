@@ -30,6 +30,7 @@ public class Customer {
     }
 
     public void menuCustomer(ArrayList<Restaurant> listRestaurant) {
+        ArrayList<Pesanan> listPesanan = new ArrayList<>();
         while (true) {
             System.out.println("Selamat datang Customer!");
             System.out.println("Menu Customer");
@@ -50,10 +51,10 @@ public class Customer {
                     lihatMenu(listRestaurant);
                     break;
                 case 3:
-                    buatPesanan(listRestaurant);
+                    buatPesanan(listRestaurant, listPesanan);
                     break;
                 case 4:
-                    lihatPesanan(listRestaurant);
+                    lihatPesanan(listRestaurant, listPesanan);
                     break;
                 case 5:
                     logins.loginSystem(listRestaurant);
@@ -114,9 +115,8 @@ public class Customer {
         scanner.nextLine();
 
         Restaurant restaurant = listRestaurant.get(restaurantIndex);
-        ArrayList<Menu> menuMakanan = restaurant.getMakananList();
-        ArrayList<Menu> menuMinuman = restaurant.getMinumanList();
-        if (menuMakanan.isEmpty()) {
+        ArrayList<Menu> menuList = restaurant.getMenuList();
+        if (menuList.isEmpty()) {
             System.out.println("Tidak terdapat menu untuk restaurant " + restaurant.getName());
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
@@ -129,90 +129,96 @@ public class Customer {
             }
         } else {
             System.out.println("| " + "Makanan :  " + restaurant.getName() + " |");
-            for (Menu item : menuMakanan) {
+            for (Menu item : menuList) {
                 System.out.println("| " + item.getNamaMenu() + " " + item.getHargaMenu() + " |");
             }
-            System.out.println("| " + "Minuman :  " + restaurant.getName() + " |");
-            for (Menu item : menuMinuman) {
-                System.out.println("| " + item.getNamaMenu() + " " + item.getHargaMenu() + " |");
-            }
-            System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
-            System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
-            if (pilihan == 1) {
-                customers.lihatMenu(listRestaurant);
-            } else {
-                String enter = scanner.nextLine();
-                customers.menuCustomer(listRestaurant);
-            }
+            System.out.println("Masukan Pesanan Kamu");
+            System.out.println("Restaurant : ");
+            System.out.println("Menu : ");
+            System.out.println("Jarak kelokasi antar");
+            System.out.println("Total harga");
         }
     }
 
-    public static void buatPesanan(ArrayList<Restaurant> listRestaurant) {
-        Customer customers = new Customer();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Pilih restaurant yang akan dipesan : ");
+    public static void buatPesanan(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         for (int i = 0; i < listRestaurant.size(); i++) {
             System.out.println("| " + (i + 1) + ".  Nama Restaurant : " + listRestaurant.get(i).getName() + " | Alamat Restaurant : " + listRestaurant.get(i).getAddress() + " |");
         }
-        System.out.print("Pilihan : ");
-        int restaurantIndex = scanner.nextInt() - 1;
-        Restaurant restaurant = listRestaurant.get(restaurantIndex);
-        scanner.nextLine();
-
-        if (listRestaurant.isEmpty()) {
-            System.out.println("Restaurant kosong.");
-            System.out.println("Silahkan tambahkan terlebih dahulu");
-            System.out.print("Tekan enter untuk kembali ke menu");
-            String enter = scanner.nextLine();
-            customers.menuCustomer(listRestaurant);
+        System.out.println("Pilih restaurant : ");
+        Scanner scanner = new Scanner(System.in);
+        int restaurantId = scanner.nextInt();
+        Restaurant restaurant = null;
+        for (Restaurant r : listRestaurant) {
+            if (r.id == restaurantId) {
+                restaurant = r;
+                break;
+            }
         }
-
-        System.out.println("Pilih restaurant untuk dilihat menunya : ");
-        for (int i = 0; i < listRestaurant.size(); i++) {
-            System.out.println((i + 1) + ". " + listRestaurant.get(i).getName());
+        if (restaurant == null) {
+            System.out.println("Restaurant tidak ditemukan.");
         }
-        System.out.print("Pilihan: ");
-        int indexRestaurant = scanner.nextInt() - 1;
-        scanner.nextLine();
-
-        Restaurant restaurants = listRestaurant.get(indexRestaurant);
-        ArrayList<Menu> menuMakanan = restaurants.getMakananList();
-        ArrayList<Menu> menuMinuman = restaurants.getMinumanList();
-        if (menuMakanan.isEmpty()) {
-            System.out.println("Tidak terdapat menu untuk restaurant " + restaurant.getName());
-            System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
-            System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
-            if (pilihan == 1) {
-                customers.lihatMenu(listRestaurant);
-            } else {
-                String enter = scanner.nextLine();
-                customers.menuCustomer(listRestaurant);
-            }
-        } else {
-            System.out.println("| " + "Makanan :  " + restaurant.getName() + " |");
-            for (Menu item : menuMakanan) {
-                System.out.println("| " + item.getNamaMenu() + " " + item.getHargaMenu() + " |");
-            }
-            System.out.println("| " + "Minuman :  " + restaurant.getName() + " |");
-            for (Menu item : menuMinuman) {
-                System.out.println("| " + item.getNamaMenu() + " " + item.getHargaMenu() + " |");
-            }
-            System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
-            System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
-            if (pilihan == 1) {
-                customers.lihatMenu(listRestaurant);
-            } else {
-                String enter = scanner.nextLine();
-                customers.menuCustomer(listRestaurant);
-            }
-
+        ArrayList<Menu> menuList = restaurant.getMenuList();
+        if (menuList.isEmpty()) {
+            System.out.println("Menu tidak ditemukan.");
         }
-
+        System.out.println("Beberapa menu untuk " + restaurant.getName() + ":");
+        for (Menu menu : menuList) {
+            System.out.println(menu.id + ". " + menu.getNamaMenu() + " - $" + menu.getHargaMenu());
+        }
+        System.out.println("Masukan menu yang akan dipesan :");
+        int menuId = scanner.nextInt();
+        Menu menu = null;
+        for (Menu m : menuList) {
+            if (m.id == menuId) {
+                menu = m;
+                break;
+            }
+        }
+        if (menu == null) {
+            System.out.println("Menu tidak ditemukan.");
+        }
+        System.out.println("Masukan jumlah pesan : ");
+        int quantity = scanner.nextInt();
+        double totalPrice = menu.getHargaMenu() * quantity;
+        System.out.println("Masukan jarak rumah : ");
+        double jarakRumah = scanner.nextDouble();
+        totalPrice += jarakRumah * 2;
+        Pesanan order = new Pesanan(restaurantId, menuId, quantity, totalPrice);
+        listPesanan.add(order);
+        System.out.println("Order sudah berhasil dengan jumlah biaya " + totalPrice);
     }
-    public static void lihatPesanan(ArrayList<Restaurant> listRestaurant) {
 
+
+    public static void lihatPesanan(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
+        if (listPesanan.isEmpty()) {
+            System.out.println("Pesanan tidak ditemukan.");
+        }
+        System.out.println("Order history:");
+        for (Pesanan order : listPesanan) {
+            Restaurant restaurant = null;
+            for (Restaurant r : listRestaurant) {
+                if (r.id == order.getRestaurantId()) {
+                    restaurant = r;
+                    break;
+                }
+            }
+            if (restaurant == null) {
+                System.out.println("Restaurant tidak ditemukan.");
+                continue;
+            }
+            Menu menu = null;
+            for (Menu m : restaurant.getMenuList()) {
+                if (m.id == order.getMenuId()) {
+                    menu = m;
+                    break;
+                }
+            }
+            if (menu == null) {
+                System.out.println("Menu tidak ditemukan.");
+                continue;
+            }
+            System.out.println("Pesanan untuk " + restaurant.getName() + ":");
+            System.out.println(menu.getNamaMenu() + " dengan harga " + menu.getHargaMenu() + " x " + order.getQuantity() + " =" + order.getTotalPrice());
+        }
     }
 }
