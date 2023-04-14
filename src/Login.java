@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
-    public static void loginSystem(ArrayList<Restaurant> listRestaurant) {
+    public static void loginSystem(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Admin admins = new Admin();
         Customer customers = new Customer();
         Scanner scanner = new Scanner(System.in);
@@ -17,11 +17,11 @@ public class Login {
             System.out.println("========================================");
             System.out.print("Masukan Pilihan : ");
             Fitur fiturs = new Fitur();
-            int pilih = fiturs.readInteger(scanner, "");
+            int pilih = fiturs.hanyaInteger(scanner, "");
             if (pilih == 1) {
-                admins.loginAdmin(listRestaurant);
+                admins.loginAdmin(listRestaurant, listPesanan);
             } else if (pilih == 2) {
-                customers.loginCustomer(listRestaurant);
+                customers.loginCustomer(listRestaurant, listPesanan);
             } else {
                 System.out.println("Pilihan tidak sesuai");
                 System.out.println("Coba ulangi");

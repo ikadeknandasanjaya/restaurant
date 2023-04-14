@@ -1,24 +1,13 @@
 public class Menu {
-    int id;
-
-    public int getId() {
-        return id;
-    }
-
+    int idMenu;
     String namaMenu;
-    double hargaMenu;
+    String tipeMenu;
+    double price;
 
-    public Menu(int idMenu, String namaMenu, double hargaMenu) {
-        this.id = idMenu;
+    public Menu(int idMenu, String namaMenu, String tipeMenu, double price) {
+        this.idMenu = idMenu;
         this.namaMenu = namaMenu;
-        this.hargaMenu = hargaMenu;
-    }
-
-    public String getNamaMenu() {
-        return namaMenu;
-    }
-
-    public double getHargaMenu() {
-        return hargaMenu;
+        this.tipeMenu = tipeMenu;
+        this.price = price;
     }
 }

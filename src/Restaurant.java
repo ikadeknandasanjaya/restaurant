@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 
 public class Restaurant {
+    int idRestaurant;
+    String namaRestaurant;
+    String address;
+    ArrayList<Menu> menuList;
 
-    int id;
+    public int getIdRestaurant() {
+        return idRestaurant;
+    }
 
-    private String name;
-    public String address;
-
-    public String getName() {
-        return name;
+    public String getNamaRestaurant() {
+        return namaRestaurant;
     }
 
     public String getAddress() {
@@ -19,18 +22,11 @@ public class Restaurant {
         return menuList;
     }
 
-    ArrayList<Menu> menuList = new ArrayList<>();
-
-
-    public Restaurant(String name, String address, int id) {
-        this.name = name;
+    public Restaurant(int restaurantId, String restaurantName, String address) {
+        this.idRestaurant = restaurantId;
+        this.namaRestaurant = restaurantName;
         this.address = address;
-        this.id = id;
-        menuList = new ArrayList<>();
-    }
-
-    public void tambahMenu(Menu menu) {
-        menuList.add(menu);
+        this.menuList = new ArrayList<>();
     }
 }
 
