@@ -38,6 +38,7 @@ public class Admin {
 
 
     public static void menuAdmin(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
+        Fitur fiturs = new Fitur();
         Scanner scanner = new Scanner(System.in);
         Login logins = new Login();
         while (true) {
@@ -53,8 +54,8 @@ public class Admin {
             System.out.println("| 6. Kembali Ke Login                 |");
             System.out.println("=======================================");
             System.out.print("Masukan Pilihan : ");
-            int choice = scanner.nextInt();
-            switch (choice) {
+            int pilihan = fiturs.hanyaInteger(scanner, "");
+            switch (pilihan) {
                 case 1:
                     lihatRestaurant(listRestaurant, listPesanan);
                     break;
@@ -78,6 +79,7 @@ public class Admin {
     }
 
     public static void lihatRestaurant(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
+        Fitur fiturs = new Fitur();
         if (listRestaurant.isEmpty()) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("| Restaurant kosong, silahkan tambah restauran |");
@@ -96,11 +98,11 @@ public class Admin {
             Admin admins = new Admin();
             System.out.println("| Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 admins.lihatRestaurant(listRestaurant, listPesanan);
             } else {
-                String enter = scanner.nextLine();
+                scanner.nextLine();
                 menuAdmin(listRestaurant, listPesanan);
             }
         }
@@ -108,27 +110,28 @@ public class Admin {
 
     public static void tambahRestaurant(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Scanner scanner = new Scanner(System.in);
+        Fitur fiturs = new Fitur();
         System.out.println("=======================================");
         System.out.println("|       Menu Tambah Restaurant         |");
         System.out.println("=======================================");
         System.out.print("Masukan ID restaurant : ");
-        int restaurantId = scanner.nextInt();
+        int idRestaurant = fiturs.hanyaInteger(scanner, "");
         scanner.nextLine();
         System.out.print("Masukan nama restaurant : ");
-        String name = scanner.nextLine();
+        String namaRestaurant = fiturs.hanyaString(scanner, "");
         System.out.print("Masukan alamat restaurant : ");
-        String address = scanner.nextLine();
-        Restaurant restaurantBaru = new Restaurant(restaurantId, name, address);
+        String alamatRestaurant = fiturs.hanyaString(scanner, "");
+        Restaurant restaurantBaru = new Restaurant(idRestaurant, namaRestaurant, alamatRestaurant);
         listRestaurant.add(restaurantBaru);
         System.out.println("| Restaurant berhasil ditambahkan |");
         Admin admins = new Admin();
         System.out.println("| Tekan 1 untuk menambah lagi atau tekan 2 untuk kembali ke menu |");
         System.out.print("Pilih : ");
-        int pilihan = scanner.nextInt();
+        int pilihan = fiturs.hanyaInteger(scanner, "");
         if (pilihan == 1) {
             admins.tambahRestaurant(listRestaurant, listPesanan);
         } else {
-            String enter = scanner.nextLine();
+            scanner.nextLine();
             menuAdmin(listRestaurant, listPesanan);
         }
     }
@@ -136,6 +139,7 @@ public class Admin {
     public static void tambahMenu(ArrayList<Restaurant> listRestaurant,ArrayList<Pesanan> listPesanan) {
         Scanner scanner = new Scanner(System.in);
         Admin admins = new Admin();
+        Fitur fiturs = new Fitur();
         System.out.println("=======================================");
         System.out.println("|          Menu Tambah Menu           |");
         System.out.println("=======================================");
@@ -151,9 +155,8 @@ public class Admin {
             System.out.println("| " + listRestaurant.get(i).getIdRestaurant() + ".  Nama Restaurant : " + listRestaurant.get(i).getNamaRestaurant() + " | Alamat Restaurant : " + listRestaurant.get(i).getAddress() + " |");
         }
         System.out.print("Pilihan : ");
-        int restaurantIndex = scanner.nextInt();
-        Fitur fiturs = new Fitur();
-        Restaurant restaurant = fiturs.cariRestaurantDenganID(restaurantIndex, listRestaurant, listPesanan);
+        int pilihRestaurant = fiturs.hanyaInteger(scanner, "");
+        Restaurant restaurant = fiturs.cariRestaurantDenganID(pilihRestaurant, listRestaurant, listPesanan);
         if (restaurant == null) {
             System.out.println("Restaurant not found. Please try again.");
             return;
@@ -161,42 +164,43 @@ public class Admin {
         scanner.nextLine();
 
         System.out.print("Masukan ID menu : ");
-        int idMenu = scanner.nextInt();
+        int idMenu = fiturs.hanyaInteger(scanner, "");
 
         scanner.nextLine();
 
         System.out.print("Masukan nama menu : ");
-        String menuName = scanner.nextLine();
+        String namaMenu = fiturs.hanyaString(scanner, "");
 
         System.out.print("Masukan jenis makanan (Makanan/Minuman) : ");
-        String menuType = scanner.nextLine();
+        String tipeMenu = fiturs.hanyaString(scanner, "");
 
         System.out.print("Masukan harga menu : ");
         double price = scanner.nextDouble();
 
-        Menu menu = new Menu(idMenu, menuName, menuType, price);
+        Menu menu = new Menu(idMenu, namaMenu, tipeMenu, price);
         restaurant.menuList.add(menu);
 
         System.out.println("Menu makanan berhasil ditambahkan.");
             System.out.println("| Tekan 1 untuk menambahkan lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan3 = scanner.nextInt();
+            int pilihan3 = fiturs.hanyaInteger(scanner, "");
             if (pilihan3 == 1) {
                 admins.tambahMenu(listRestaurant, listPesanan);
             } else {
-                String enter = scanner.nextLine();
+                scanner.nextLine();
                 menuAdmin(listRestaurant,listPesanan);
         }
     }
 
     public static void lihatMenu(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Scanner scanner = new Scanner(System.in);
+        Fitur fiturs = new Fitur();
         Admin admins = new Admin();
         if (listRestaurant.isEmpty()) {
             System.out.println("Restaurant kosong.");
             System.out.println("Silahkan tambahkan terlebih dahulu");
             System.out.print("Tekan enter untuk kembali ke menu");
-            String enter = scanner.nextLine();
+            scanner.nextLine();
             admins.menuAdmin(listRestaurant, listPesanan);
         }
 
@@ -205,20 +209,19 @@ public class Admin {
             System.out.println((i + 1) + ". " + listRestaurant.get(i).getNamaRestaurant());
         }
         System.out.print("Pilihan: ");
-        int restaurantIndex = scanner.nextInt();
+        int idRestaurant = fiturs.hanyaInteger(scanner, "");
         scanner.nextLine();
-        Fitur fiturs = new Fitur();
-        Restaurant restaurant = fiturs.cariRestaurantDenganID(restaurantIndex, listRestaurant, listPesanan);
+        Restaurant restaurant = fiturs.cariRestaurantDenganID(idRestaurant, listRestaurant, listPesanan);
         ArrayList<Menu> menuRestaurant = restaurant.getMenuList();
         if (menuRestaurant.isEmpty()) {
             System.out.println("Tidak terdapat menu untuk restaurant " + restaurant.getNamaRestaurant());
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 admins.lihatMenu(listRestaurant, listPesanan);
             } else {
-                String enter = scanner.nextLine();
+                scanner.nextLine();
                 admins.menuAdmin(listRestaurant, listPesanan);
             }
         } else {
@@ -229,11 +232,11 @@ public class Admin {
             }
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 admins.lihatMenu(listRestaurant, listPesanan);
             } else {
-                String enter = scanner.nextLine();
+                scanner.nextLine();
                 menuAdmin(listRestaurant, listPesanan);
             }
         }
@@ -241,6 +244,7 @@ public class Admin {
 
 
     public static void hapusRestaurant(ArrayList <Restaurant> listRestaurant, ArrayList <Pesanan> listPesanan) {
+        Fitur fiturs = new Fitur();
         Scanner scanner = new Scanner(System.in);
         Admin admins = new Admin();
         System.out.println("=======================================");
@@ -250,7 +254,7 @@ public class Admin {
             System.out.println("Restaurant kosong.");
             System.out.println("Silahkan tambahkan terlebih dahulu");
             System.out.print("Tekan enter untuk kembali ke menu");
-            String enter = scanner.nextLine();
+            scanner.nextLine();
             admins.menuAdmin(listRestaurant, listPesanan);
         }
         System.out.println("Pilih restaurant yang akan dihapus");
@@ -258,16 +262,16 @@ public class Admin {
             System.out.println((i + 1) + ". " + listRestaurant.get(i).getNamaRestaurant());
         }
         System.out.print("Pilih : ");
-        int pilih = scanner.nextInt();
+        int pilih = fiturs.hanyaInteger(scanner, "");
         listRestaurant.remove(pilih - 1);
         System.out.println("| Restaurant telah dihapus |");
         System.out.println("| Tekan 1 untuk menghapus lagi atau tekan 2 untuk kembali ke menu |");
         System.out.print("Pilih : ");
-        int pilihan = scanner.nextInt();
+        int pilihan = fiturs.hanyaInteger(scanner, "");
         if (pilihan == 1) {
             admins.hapusRestaurant(listRestaurant, listPesanan);
         } else {
-            String enter = scanner.nextLine();
+            scanner.nextLine();
             menuAdmin(listRestaurant, listPesanan);
         }
     }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Login {
     public static void loginSystem(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Admin admins = new Admin();
+        Fitur fiturs = new Fitur();
         Customer customers = new Customer();
         Scanner scanner = new Scanner(System.in);
 
@@ -16,7 +17,6 @@ public class Login {
             System.out.println("|         2. Customer                  |");
             System.out.println("========================================");
             System.out.print("Masukan Pilihan : ");
-            Fitur fiturs = new Fitur();
             int pilih = fiturs.hanyaInteger(scanner, "");
             if (pilih == 1) {
                 admins.loginAdmin(listRestaurant, listPesanan);

@@ -31,6 +31,7 @@ public class Customer {
 
     public void menuCustomer(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         while (true) {
+            Fitur fiturs = new Fitur();
             System.out.println("Selamat datang Customer!");
             System.out.println("Menu Customer");
             System.out.println("1. Lihat Restaurant");
@@ -41,7 +42,7 @@ public class Customer {
             System.out.print("Masukan Pilihan : ");
             Scanner scanner = new Scanner(System.in);
             Login logins = new Login();
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             switch (pilihan) {
                 case 1:
                     lihatRestaurant(listRestaurant, listPesanan);
@@ -68,6 +69,7 @@ public class Customer {
     public static void lihatRestaurant(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Scanner scanner = new Scanner(System.in);
         Customer customers = new Customer();
+        Fitur fiturs = new Fitur();
         if (listRestaurant.isEmpty()) {
             scanner = new Scanner(System.in);
             System.out.println("Restaurant kosong, silahkan tambah restauran");
@@ -84,7 +86,7 @@ public class Customer {
             }
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 customers.lihatRestaurant(listRestaurant, listPesanan);
             } else {
@@ -97,6 +99,7 @@ public class Customer {
     public static void lihatMenu(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Scanner scanner = new Scanner(System.in);
         Customer customers = new Customer();
+        Fitur fiturs = new Fitur();
         if (listRestaurant.isEmpty()) {
             System.out.println("Restaurant kosong.");
             System.out.println("Silahkan tambahkan terlebih dahulu");
@@ -109,17 +112,17 @@ public class Customer {
         for (int i = 0; i < listRestaurant.size(); i++) {
             System.out.println("| " + (i + 1) + ".  Nama Restaurant : " + listRestaurant.get(i).getNamaRestaurant() + " | Alamat Restaurant : " + listRestaurant.get(i).getAddress() + " |");
         }
-        System.out.print("Pilihan: ");
-        int restaurantIndex = scanner.nextInt() - 1;
+        System.out.print("Pilihan : ");
+        int pilihRestaurant = fiturs.hanyaInteger(scanner, "");
         scanner.nextLine();
 
-        Restaurant restaurant = listRestaurant.get(restaurantIndex);
+        Restaurant restaurant = listRestaurant.get(pilihRestaurant);
         ArrayList<Menu> menuList = restaurant.getMenuList();
         if (menuList.isEmpty()) {
             System.out.println("Tidak terdapat menu untuk restaurant " + restaurant.getNamaRestaurant());
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 customers.lihatMenu(listRestaurant, listPesanan);
             } else {
@@ -135,7 +138,7 @@ public class Customer {
         }
         System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
         System.out.print("Pilih : ");
-        int pilihan = scanner.nextInt();
+        int pilihan = fiturs.hanyaInteger(scanner, "");
         if (pilihan == 1) {
             customers.lihatMenu(listRestaurant, listPesanan);
         } else {
@@ -146,14 +149,14 @@ public class Customer {
 
     public static void buatPesanan(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Customer customers = new Customer();
+        Fitur fiturs = new Fitur();
         for (int i = 0; i < listRestaurant.size(); i++) {
             System.out.println("| " + (i + 1) + ".  Nama Restaurant : " + listRestaurant.get(i).getNamaRestaurant() + " | Alamat Restaurant : " + listRestaurant.get(i).getAddress() + " |");
         }
         System.out.print("Pilih restaurant : ");
         Scanner scanner = new Scanner(System.in);
-        int restaurantId = scanner.nextInt();
-        Fitur fiturs = new Fitur();
-        Restaurant restaurant = fiturs.cariRestaurantDenganID(restaurantId, listRestaurant, listPesanan);
+        int pilihRestaurant = fiturs.hanyaInteger(scanner, "");
+        Restaurant restaurant = fiturs.cariRestaurantDenganID(pilihRestaurant, listRestaurant, listPesanan);
         if (restaurant == null) {
             System.out.println("Restaurant not found. Please try again.");
             return;
@@ -164,25 +167,25 @@ public class Customer {
             System.out.println("| "+ menu.idMenu + "\t\t\t\t" + menu.namaMenu + "\t\t\t\t" + menu.tipeMenu + "\t\t\t\t" + menu.price + " |");
         }
         System.out.print("Masukan menu yang akan dipesan :");
-        int menuId = scanner.nextInt();
+        int idMenu = fiturs.hanyaInteger(scanner, "");
 
-        Menu menu = fiturs.cariMenuDenganID(restaurant, menuId, listRestaurant, listPesanan);
+        Menu menu = fiturs.cariMenuDenganID(restaurant, idMenu, listRestaurant, listPesanan);
 
         if (menu == null) {
             System.out.println("Menu tidak ditemukan.");
         }
         System.out.print("Masukan jumlah pesan : ");
-        int jumlah = scanner.nextInt();
+        int jumlah = fiturs.hanyaInteger(scanner, "");
         System.out.print("Masukan jarak rumah (dalam KM) : ");
-        int jarakRumah = scanner.nextInt();
+        int jarakRumah = fiturs.hanyaInteger(scanner, "");
         double total = menu.price * jumlah;
         total = total * jarakRumah * 0.75;
-        Pesanan order = new Pesanan(restaurantId, menuId, jumlah, jarakRumah, total);
+        Pesanan order = new Pesanan(pilihRestaurant, idMenu, jumlah, jarakRumah, total);
         listPesanan.add(order);
         System.out.println("Order sudah berhasil dengan jumlah biaya " + total);
         System.out.println("Tekan 1 untuk memesan lagi atau tekan 2 untuk kembali ke menu |");
         System.out.print("Pilih : ");
-        int pilihan = scanner.nextInt();
+        int pilihan = fiturs.hanyaInteger(scanner, "");
         if (pilihan == 1) {
             customers.buatPesanan(listRestaurant, listPesanan);
         } else {
@@ -194,6 +197,7 @@ public class Customer {
 
     public static void lihatPesanan(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         Customer customers = new Customer();
+        Fitur fiturs = new Fitur();
         Scanner scanner = new Scanner(System.in);
         System.out.println("| Pilih restaurant untuk dilihat pesanannya :  |");
         for (int i = 0; i < listRestaurant.size(); i++) {
@@ -203,7 +207,7 @@ public class Customer {
             System.out.println("Pesanan tidak ditemukan.");
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 customers.lihatPesanan(listRestaurant, listPesanan);
             } else {
@@ -212,16 +216,15 @@ public class Customer {
             }
         }
         System.out.print("Pilih : ");
-        int restaurantId = scanner.nextInt();
+        int pilihRestaurant = fiturs.hanyaInteger(scanner, "");
         scanner.nextLine();
-        Fitur fiturs = new Fitur();
-        Restaurant restaurant = fiturs.cariRestaurantDenganID(restaurantId, listRestaurant, listPesanan);
+        Restaurant restaurant = fiturs.cariRestaurantDenganID(pilihRestaurant, listRestaurant, listPesanan);
 
         if (restaurant == null) {
             System.out.println("Restaurant tidak ditemukan.");
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");
-            int pilihan = scanner.nextInt();
+            int pilihan = fiturs.hanyaInteger(scanner, "");
             if (pilihan == 1) {
                 customers.lihatPesanan(listRestaurant, listPesanan);
             } else {
@@ -234,9 +237,9 @@ public class Customer {
         System.out.println("| ID Restaurant\t\tID menu\t\tNama menu\t\tJumlah pesanan\t\tJumlah menu\t\tJarak lokasi antar\t\tTotal harga");
         double totalLast = 0;
         for (Pesanan order : listPesanan) {
-            if (order.idRestaurant== restaurantId) {
+            if (order.idRestaurant== pilihRestaurant) {
                 String namaMenu = fiturs.cariMenuDenganID(restaurant, order.idMenu, listRestaurant, listPesanan).namaMenu;
-                System.out.println("| "+ restaurantId + "\t\t\t\t\t\t" + order.idMenu + "\t\t\t\t\t"  + namaMenu + "\t\t\t\t\t" + order.jumlah + "\t\t\t\t\t" + order.jarak + "\t\t\t\t\t" + order.totalharga);
+                System.out.println("| "+ pilihRestaurant + "\t\t\t\t\t\t" + order.idMenu + "\t\t\t\t\t"  + namaMenu + "\t\t\t\t\t" + order.jumlah + "\t\t\t\t\t" + order.jarak + "\t\t\t\t\t" + order.totalharga);
                 for (int i = 0; i < restaurant.menuList.size(); i++) {
                     totalLast =  totalLast + order.totalharga;
                 }
@@ -245,7 +248,7 @@ public class Customer {
         System.out.println("Total yang harus kamu bayarkan ke restaurant " + restaurant.getNamaRestaurant() + " adalah : " + totalLast );
         System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
         System.out.print("Pilih : ");
-        int pilihan = scanner.nextInt();
+        int pilihan = fiturs.hanyaInteger(scanner, "");
         if (pilihan == 1) {
             customers.lihatPesanan(listRestaurant, listPesanan);
         } else {

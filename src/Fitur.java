@@ -21,13 +21,6 @@ public class Fitur {
         }
         return input;
     }
-//    public static void lihatRestaurant(ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
-//        System.out.println("Restaurant List:");
-//        System.out.println("Restaurant ID\t\tRestaurant Name\t\tAddress");
-//        for (Restaurant restaurant : listRestaurant) {
-//            System.out.println(restaurant.idRestaurant + "\t\t" + restaurant.namaRestaurant + "\t\t" + restaurant.address);
-//        }
-//    }
 
     public static Restaurant cariRestaurantDenganID(int restaurantId, ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         for (Restaurant restaurant : listRestaurant) {
