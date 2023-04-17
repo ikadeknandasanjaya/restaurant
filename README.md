@@ -53,7 +53,7 @@ UML dari program ini dapat dilihat di sini.
 
 #### Instalasi
 
-1. Unduh file instalasi dari sini.
+1. Unduh file instalasi dari [sini](https://github.com/ikadeknandasanjaya/restaurant/raw/master/assets/jar/restaurant_jar.zip).
 2. Ekstrak file instalasi ke direktori yang diinginkan.
 3. Buka terminal atau command prompt dan arahkan ke direktori tempat file instalasi diekstrak.
 4. Jalankan program dengan perintah 'java -jar restaurant.jar'.
