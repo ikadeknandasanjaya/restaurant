@@ -33,7 +33,7 @@ public class Fitur {
 
     public static Menu cariMenuDenganID(Restaurant restaurant, int menuId, ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         for (Menu menu : restaurant.getMenuList()) {
-            if (menu.idMenu == menuId) {
+            if (menu.getIdMenu() == menuId) {
                 return menu;
             }
         }

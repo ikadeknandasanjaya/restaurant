@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Admin {
-    public static String username = "admin";
+    private static String username = "admin";
 
-    public static String password = "admin";
+    private static String password = "admin";
 
     public String getUsername() {
         return this.username;
@@ -171,7 +171,7 @@ public class Admin {
         System.out.print("Masukan nama menu : ");
         String namaMenu = fiturs.hanyaString(scanner, "");
 
-        System.out.print("Masukan jenis makanan (Makanan/Minuman) : ");
+        System.out.print("Masukan jenis menu (Makanan/Minuman) : ");
         String tipeMenu = scanner.nextLine();
 
         System.out.print("Masukan harga menu : ");
@@ -228,7 +228,7 @@ public class Admin {
             System.out.println("| " + "Menu untuk restaurant :  " + restaurant.getNamaRestaurant() + " |");
             System.out.println("| ID Menu \t\t Nama Menu \t\t Tipe Menu \t\t Harga");
             for (Menu item : menuRestaurant) {
-                System.out.println("| " + item.idMenu + " \t\t\t " + item.namaMenu + " \t\t\t " + item.tipeMenu + " \t\t " + item.price + " |");
+                System.out.println("| " + item.getIdMenu() + " \t\t\t " + item.getNamaMenu() + " \t\t\t " + item.getTipeMenu() + " \t\t " + item.getPrice() + " |");
             }
             System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
             System.out.print("Pilih : ");

@@ -12,7 +12,7 @@ public class Login {
             System.out.println("========================================");
             System.out.println("|  Selamat Datang di Sistem Pemesanan  |");
             System.out.println("========================================");
-            System.out.println("| Options:                             |");
+            System.out.println("| Login sebagai :                      |");
             System.out.println("|         1. Admin                     |");
             System.out.println("|         2. Customer                  |");
             System.out.println("========================================");

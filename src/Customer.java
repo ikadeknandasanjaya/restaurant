@@ -133,7 +133,7 @@ public class Customer {
             System.out.println("| " + "Menu untuk restaurant :  " + restaurant.getNamaRestaurant() + " |");
             System.out.println("| ID Menu \t\t Nama Menu \t\t Tipe Menu \t\t Harga");
             for (Menu item : menuList) {
-                System.out.println("| " + item.idMenu + " \t\t\t " + item.namaMenu + " \t\t\t " + item.tipeMenu + " \t\t\t " + item.price + " |");
+                System.out.println("| " + item.getIdMenu() + " \t\t\t " + item.getNamaMenu() + " \t\t\t " + item.getTipeMenu() + " \t\t\t " + item.getPrice() + " |");
             }
         }
         System.out.println("Tekan 1 untuk melihat lagi atau tekan 2 untuk kembali ke menu |");
@@ -164,7 +164,7 @@ public class Customer {
         System.out.println("| Menu dari restaurant " + restaurant.getNamaRestaurant() + ":" + "  |");
         System.out.println("| ID Menu\t\tNama Menu\t\tTipe Menu\t\tHarga Menu |");
         for (Menu menu : restaurant.getMenuList()) {
-            System.out.println("| "+ menu.idMenu + "\t\t\t\t" + menu.namaMenu + "\t\t\t\t" + menu.tipeMenu + "\t\t\t\t" + menu.price + " |");
+            System.out.println("| "+ menu.getIdMenu() + "\t\t\t\t" + menu.getNamaMenu() + "\t\t\t\t" + menu.getTipeMenu() + "\t\t\t\t" + menu.getPrice() + " |");
         }
         System.out.print("Masukan menu yang akan dipesan :");
         int idMenu = fiturs.hanyaInteger(scanner, "");
@@ -178,7 +178,7 @@ public class Customer {
         int jumlah = fiturs.hanyaInteger(scanner, "");
         System.out.print("Masukan jarak rumah (dalam KM) : ");
         int jarakRumah = fiturs.hanyaInteger(scanner, "");
-        double total = menu.price * jumlah;
+        double total = menu.getPrice() * jumlah;
         total = total * jarakRumah * 0.75;
         Pesanan order = new Pesanan(pilihRestaurant, idMenu, jumlah, jarakRumah, total);
         listPesanan.add(order);
@@ -238,7 +238,7 @@ public class Customer {
         double totalLast = 0;
         for (Pesanan order : listPesanan) {
             if (order.getIdRestaurant() == pilihRestaurant) {
-                String namaMenu = fiturs.cariMenuDenganID(restaurant, order.getIdMenu(), listRestaurant, listPesanan).namaMenu;
+                String namaMenu = fiturs.cariMenuDenganID(restaurant, order.getIdMenu(), listRestaurant, listPesanan).getNamaMenu();
                 System.out.println("| "+ pilihRestaurant + "\t\t\t\t\t\t" + order.getIdMenu() + "\t\t\t\t\t"  + namaMenu + "\t\t\t\t\t" + order.getJumlah() + "\t\t\t\t\t" + order.getJarak() + "\t\t\t\t\t" + order.getTotalharga());
                 for (int i = 0; i < restaurant.getMenuList().size(); i++) {
                     totalLast =  totalLast + order.getTotalharga();

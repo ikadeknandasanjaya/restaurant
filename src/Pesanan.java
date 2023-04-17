@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 
 public class Pesanan {
     private int idRestaurant;
     private int idMenu;
     private int jumlah;
     private int jarak;
-    private double totalharga;
+    private double totalHarga;
 
     public int getIdRestaurant() {
         return idRestaurant;
@@ -24,14 +23,14 @@ public class Pesanan {
     }
 
     public double getTotalharga() {
-        return totalharga;
+        return totalHarga;
     }
 
     public Pesanan(int idRestaurant, int idMenu, int jumlah, int jarak, double totalharga) {
         this.idRestaurant = idRestaurant;
         this.idMenu = idMenu;
         this.jumlah = jumlah;
-        this.totalharga = totalharga;
+        this.totalHarga = totalharga;
         this.jarak = jarak;
     }
 }
