@@ -172,13 +172,13 @@ public class Admin {
         String namaMenu = fiturs.hanyaString(scanner, "");
 
         System.out.print("Masukan jenis makanan (Makanan/Minuman) : ");
-        String tipeMenu = fiturs.hanyaString(scanner, "");
+        String tipeMenu = scanner.nextLine();
 
         System.out.print("Masukan harga menu : ");
         double price = scanner.nextDouble();
 
         Menu menu = new Menu(idMenu, namaMenu, tipeMenu, price);
-        restaurant.menuList.add(menu);
+        restaurant.getMenuList().add(menu);
 
         System.out.println("Menu makanan berhasil ditambahkan.");
             System.out.println("| Tekan 1 untuk menambahkan lagi atau tekan 2 untuk kembali ke menu |");
@@ -196,7 +196,7 @@ public class Admin {
         Scanner scanner = new Scanner(System.in);
         Fitur fiturs = new Fitur();
         Admin admins = new Admin();
-        if (listRestaurant.isEmpty()) {
+         if (listRestaurant.isEmpty()) {
             System.out.println("Restaurant kosong.");
             System.out.println("Silahkan tambahkan terlebih dahulu");
             System.out.print("Tekan enter untuk kembali ke menu");

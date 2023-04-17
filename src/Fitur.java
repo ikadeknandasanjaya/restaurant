@@ -24,7 +24,7 @@ public class Fitur {
 
     public static Restaurant cariRestaurantDenganID(int restaurantId, ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
         for (Restaurant restaurant : listRestaurant) {
-            if (restaurant.idRestaurant == restaurantId) {
+            if (restaurant.getIdRestaurant() == restaurantId) {
                 return restaurant;
             }
         }
@@ -32,7 +32,7 @@ public class Fitur {
     }
 
     public static Menu cariMenuDenganID(Restaurant restaurant, int menuId, ArrayList<Restaurant> listRestaurant, ArrayList<Pesanan> listPesanan) {
-        for (Menu menu : restaurant.menuList) {
+        for (Menu menu : restaurant.getMenuList()) {
             if (menu.idMenu == menuId) {
                 return menu;
             }
@@ -40,3 +40,4 @@ public class Fitur {
         return null;
     }
 }
+

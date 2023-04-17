@@ -1,6 +1,7 @@
 public class Menu {
     int idMenu;
     String namaMenu;
+
     String tipeMenu;
     double price;
 

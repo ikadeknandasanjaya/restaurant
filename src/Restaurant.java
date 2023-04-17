@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Restaurant {
-    int idRestaurant;
-    String namaRestaurant;
-    String address;
-    ArrayList<Menu> menuList;
+    private int idRestaurant;
+    private String namaRestaurant;
+    private String address;
+    private ArrayList<Menu> menuList;
 
     public int getIdRestaurant() {
         return idRestaurant;
