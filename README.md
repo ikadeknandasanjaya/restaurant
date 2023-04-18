@@ -43,7 +43,9 @@ Customer memiliki 4 opsi yaitu melihat restaurant, melihat menu, membuat pesanan
 
 #### UML
 
-UML dari program ini dapat dilihat di sini.
+UML dari program ini dapat dilihat di bawah ini.
+
+![Uploading UML Restaurant.png…]()
 
 #### Persyaratan Sistem
 
