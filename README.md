@@ -45,7 +45,7 @@ Customer memiliki 4 opsi yaitu melihat restaurant, melihat menu, membuat pesanan
 
 UML dari program ini dapat dilihat di bawah ini.
 
-![Uploading UML Restaurant.png…]()
+https://raw.githubusercontent.com/ikadeknandasanjaya/restaurant/master/assets/img/UML%20Restaurant.png?token=GHSAT0AAAAAACA6D5V3RZHZH7LQZXXFOUDQZB56SVA
 
 #### Persyaratan Sistem
 
